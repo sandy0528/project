@@ -1,4 +1,4 @@
-# this is the first assisiment 20230925
+# this is the first assisiment 20230925 main branch
 
 first_name = "Sandy"
 birth_year_month = [1979,4]
