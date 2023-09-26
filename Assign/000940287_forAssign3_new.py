@@ -1,6 +1,11 @@
+# Use for loop to print the song “99 Bottles of Beer on the Wall” to the screen
+# Print number 1-15 in English words
+
+# use dictionaries to store number1-15 (key) and releated English words (value)
 bottles_number_words= {1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six', 7: 'Seven', 
 8: 'Eight', 9: 'Nine',10:'Ten',11:'Eleven',12:'Twelve', 13:'Thirteen',14:'Fourteen',15:'Fifteen'}
 
+# use for loop
 for bottles_number in range(100, 0, -1):
     if bottles_number == 1:
         first_bottle_words = "bottle"
@@ -11,7 +16,7 @@ for bottles_number in range(100, 0, -1):
     else:
         first_bottle_words = "bottles"
         second_bottle_words= "bottles"
-
+    # if bottles number in 1-15, use dictionaries's value, otherwise use number
     if bottles_number in bottles_number_words.keys():
         print (f"{bottles_number_words[bottles_number]} {first_bottle_words} of beer on the wall,")
         print( f"{bottles_number_words[bottles_number]} {first_bottle_words} of beer!")
