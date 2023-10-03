@@ -129,9 +129,3 @@ for k in range(0,len(chooseBirdList)):
  has {eval(chooseBirdList[k]).getLegs()} legs and {eval(chooseBirdList[k]).getWings()} wings. It\
  {eval(chooseBirdList[k]).getCharacteristic()}")
 
-#print(x)
-#tony = Eagles()
-#print(tony.getcharacteristic())
-#zoo = { "animals": [tony]}
-
-#print(len(zoo['animals']))
