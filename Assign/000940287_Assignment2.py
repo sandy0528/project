@@ -13,8 +13,18 @@ class Animal:
     def __init__(self, legs=4, hands=0):
         self.__legs = legs
         self.__hands = hands
-    
-
+        
+    def setLegs(self,numLegs):
+        assert(numLegs,int)
+        try:
+            if numLegs<2:
+                raise ValueError("legs should >=2")
+        except ValueError as e:
+            print(e)
+        else:
+            self.__legs = numLegs
+            
+            
     def getLegs(self):
         return self.__legs
     def getHands(self):
@@ -98,8 +108,11 @@ class Zoo:
                 raise ValueError("Invalid type. Only instances of Animal or Bird classes are allowed.")
         
             #Using filter function to ensure that only one object of each animal class can be added to the zoo. For example, zoo can have only one tiger. If we try to add more, print a message stating, animal already added.
-            if any(filter(lambda animal: animal.__class__.__name__ == newanimalorbird.__class__.__name__, self.__animalList)) or any(filter(lambda bird: bird.__class__.__name__ == newanimalorbird.__class__.__name__, self.__birdList)):  
-                raise ValueError (f"{newanimalorbird.__class__.__name__} already added to the zoo.")
+            if any(filter(lambda animal: animal == newanimalorbird.__class__.__name__, self.__animalList)) or any(filter(lambda bird: bird.__class__.__name__ == newanimalorbird.__class__.__name__, self.__birdList)):  
+                raise ValueError (f"{newanimalorbird.__class__.__name__} already added to the zoo.")  
+        except ValueError as e:
+            print(e)
+        else:
             # if it is an animal and animal<2, add this animal to zoo
             if isinstance(newanimalorbird,Animal):
                 if len(self.__animalList) < 2:
@@ -114,9 +127,7 @@ class Zoo:
                     print(f"{newanimalorbird.__class__.__name__} successful to add")
                 else:
                     print(f"zoo already have max birds")
-        except ValueError as e:
-            print(e)
-
+                    
     # show the zoo all animals and bird information
     def looking(self):
         
@@ -132,13 +143,18 @@ class Zoo:
         #animalStrings = list(map(animalInfo, self.__animalList))
         #birdstrings = list(map(birdInfo, self.__birdList))
         zooPrint = reduce(lambda x, y: "\n".join([x, y]), list(map(animalInfo, self.__animalList)) + list(map(birdInfo, self.__birdList))," ")
+        print("")
+        print("show all the zoo animal and bird information:")
         print(zooPrint)
     
     #   look at all the canines in the zoo, use a filter function with lambdas for it. 
     def lookAtCanines(self):
         canines = filter(lambda animal: isinstance(eval(animal)(), Caninel), self.__animalList)
         canineInfo = list(map(lambda animal: f"{animal} in the zoo. It is a Canine. It has {eval(animal)().getLegs()} legs and {eval(animal)().getHands()} hands. {eval(animal)().getCharacteristic()}", canines))
+        print("")
+        print("show all Canine information:")
         if canineInfo:
+            
             print("\n".join(canineInfo))
         else:
             print("No canines in the zoo.")
@@ -146,21 +162,24 @@ class Zoo:
     def lookAtTigers(self):
         tigers = filter(lambda animal: animal.startswith('Ti') and animal.endswith('er'), self.__animalList)
         tigerInfo = list(map(lambda animal: f"{animal} in the zoo. It has {eval(animal)().getLegs()} legs and {eval(animal)().getHands()} hands. {eval(animal)().getCharacteristic()}", tigers))
-        
+        print("")
+        print("show all Tiger information:")
         if tigerInfo:
-             print("\n".join(tigerInfo))
+            
+            print("\n".join(tigerInfo))
         else:
             print("No tigers in the zoo.")  
             
 InvalidInput = "InvalidInput"
 zoo = Zoo()
 zoo.looking()
-Terry=Tiger()
 zoo.addAnimalOrBird(InvalidInput)
-zoo.addAnimalOrBird(Terry)
+zoo.addAnimalOrBird(Tiger())
+zoo.addAnimalOrBird(Tiger())
 zoo.addAnimalOrBird(Wolves())
 zoo.addAnimalOrBird(Wildcat())
 zoo.addAnimalOrBird(Eagles())
 zoo.looking()
 zoo.lookAtCanines()
 zoo.lookAtTigers()
+Wolves().setLegs(1)
